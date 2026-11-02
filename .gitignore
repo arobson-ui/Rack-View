@@ -1,0 +1,8 @@
+.DS_Store
+.claude/
+
+# Rack data never goes in the repo (it holds the app only)
+*.json
+data/
+dist/
+deploy/update-token

@@ -1,0 +1,21 @@
+[Unit]
+Description=WCC Rack View
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+User=rackview
+Group=rackview
+WorkingDirectory=/opt/rackview
+EnvironmentFile=/etc/rackview/config.env
+ExecStart=/usr/bin/env ruby /opt/rackview/serve.rb
+Restart=on-failure
+RestartSec=5
+# Device up-checks use ping
+AmbientCapabilities=CAP_NET_RAW CAP_NET_BIND_SERVICE
+NoNewPrivileges=true
+ProtectSystem=full
+ReadWritePaths=/var/lib/rackview
+
+[Install]
+WantedBy=multi-user.target

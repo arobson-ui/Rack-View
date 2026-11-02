@@ -1,0 +1,205 @@
+/* Realistic faceplates (see js/faces.js). Sizes are relative to --u-height. */
+
+.device.skin { padding: 0; background: none; border: 0; border-radius: 0; margin: 0; overflow: visible; }
+.device.skin:hover { filter: brightness(1.08); }
+.device.skin.selected { outline: 3px solid var(--wcc-yellow); outline-offset: 0; }
+
+.fp {
+  position: relative; width: 100%; height: 100%;
+  display: flex; align-items: stretch;
+  border-radius: 2px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.18), inset 0 -1px 0 rgba(0,0,0,.5), 0 1px 0 rgba(0,0,0,.6);
+}
+.fp-body { flex: 1; min-width: 0; display: flex; align-items: center; gap: 5px; padding: 2px 5px; overflow: hidden; position: relative; }
+.fp .grow { flex: 1; }
+.fp .col { display: flex; flex-direction: column; justify-content: center; gap: 3px; align-self: stretch; }
+.fp .col.narrow { flex: 0 0 auto; }
+.fp .col.full { flex: 1; gap: 0; }
+
+/* colours */
+.fp.silver { background: linear-gradient(180deg, #eef0f2 0%, #d5d9dd 55%, #c3c8cd 100%); }
+.fp.steel { background: linear-gradient(180deg, #c9ccd0, #a9adb2); }
+.fp.graphite { background: linear-gradient(180deg, #4a4f55, #33373c); }
+.fp.black { background: linear-gradient(180deg, #2c2f33 0%, #1b1d20 100%); }
+
+/* rack ears with a screw per U */
+.ear { flex: 0 0 9px; position: relative; background: inherit; filter: brightness(.88);
+  background-image: radial-gradient(circle at 50% 50%, #c7cbd0 0 1.6px, #6e747a 2.1px, transparent 2.6px);
+  background-size: 100% var(--u-height); background-repeat: repeat-y; background-position: center; }
+.ear.l { border-right: 1px solid rgba(0,0,0,.35); border-radius: 2px 0 0 2px; }
+.ear.r { border-left: 1px solid rgba(0,0,0,.35); border-radius: 0 2px 2px 0; }
+.fp.silver .ear { background-color: #cdd1d5; }
+
+/* ports */
+.ports-wrap { display: flex; gap: 3px; height: 70%; max-height: 18px; }
+.port-block { display: grid; grid-auto-flow: column; gap: 1px; height: 100%; } /* column flow: odd ports on top, like the real switch */
+.rj.up, .fp.silver .rj.up { background: #1f7a4c; box-shadow: inset 0 -2px 0 #5ef08a; }
+.rj.up.poe, .fp.silver .rj.up.poe { box-shadow: inset 0 -2px 0 #5ef08a, inset 0 2px 0 #ffc72c; }
+.sfp.up { box-shadow: inset 0 0 0 1.5px #1b1e21, inset 0 -3px 0 #5ef08a; }
+/* jacks and cages scale with the rack's width (cqw = % of .rack-bay), so a wider rack shows bigger ports */
+.rj { display: block; width: clamp(4px, 1.6cqw, 9px); background: #0e1012; border-radius: 1px; box-shadow: inset 0 -2px 0 #2b3036; }
+.fp.silver .rj { background: #1c1f22; }
+.sfp-block { height: 70%; max-height: 18px; margin-left: 3px; }
+.sfp { display: block; width: clamp(6px, 2.1cqw, 12px); background: linear-gradient(#9aa1a8, #737a81); border: 1px solid #5c6268; border-radius: 1px; box-shadow: inset 0 0 0 1.5px #1b1e21; }
+.console { width: 7px; height: 6px; background: #0e1012; border-radius: 1px; }
+
+/* LEDs */
+.led2 { display: inline-block; width: 4px; height: 4px; border-radius: 50%; background: #39d96b; box-shadow: 0 0 3px #39d96b; }
+.led2.o { background: #ffb020; box-shadow: 0 0 3px #ffb020; }
+.led2.b { background: #4aa3ff; box-shadow: 0 0 3px #4aa3ff; }
+.mini-leds { display: flex; gap: 2px; align-items: center; }
+
+/* brand text */
+.brand-txt { font: 700 7px/1 Arial, sans-serif; letter-spacing: .5px; color: #c9cdd2; white-space: nowrap; }
+.brand-txt.small { font-size: 6.5px; }
+.brand-txt.light { color: #e8eaec; }
+.brand-txt.aruba { font: 700 9px/1 Arial, sans-serif; color: #ff8300; letter-spacing: 0; }
+.brand-txt.am { font-size: 5px; line-height: 1.1; color: #bfc4c9; }
+.brand-txt.corner { position: absolute; left: 6px; top: 3px; }
+.model-txt { font: 700 6px Arial, sans-serif; color: #d0d4d8; }
+
+/* UniFi */
+.unifi-lcd { flex: 0 0 auto; width: 11px; height: 11px; border-radius: 2px; background: radial-gradient(circle, #6fb8ff 0 30%, #1663d9 70%); box-shadow: 0 0 5px rgba(60,140,255,.7); }
+.unifi-lcd.tall { width: 14px; height: 18px; align-self: flex-start; margin-top: 4px; }
+.trays { display: grid; gap: 2px; flex: 1; align-self: stretch; padding: 2px 0; }
+.tray { position: relative; border-radius: 2px; cursor: pointer; padding: 0; }
+.silver-trays .tray { background: linear-gradient(180deg, #f7f8f9, #dfe2e5); border: 1px solid #b8bdc2; }
+.dark-trays .tray { background: linear-gradient(180deg, #34383d, #24272b); border: 1px solid #0d0f11; }
+.dark-trays.vertical .tray { border-radius: 2px 2px 1px 1px; }
+.tray-led { position: absolute; right: 3px; top: 50%; width: 4px; height: 4px; margin-top: -2px; border-radius: 50%; background: #39d96b; box-shadow: 0 0 3px #39d96b; }
+.dark-trays.vertical .tray-led { right: 50%; margin-right: -2px; top: 4px; margin-top: 0; }
+.tray.ageing .tray-led, .hdd-leds .hddled.ageing { background: #ffc72c; box-shadow: 0 0 4px #ffc72c; }
+.tray.old .tray-led, .hdd-leds .hddled.old { background: #ff6a1a; box-shadow: 0 0 4px #ff6a1a; }
+.tray.failed .tray-led, .hdd-leds .hddled.failed { background: #ff2d2d; box-shadow: 0 0 5px #ff2d2d; }
+.tray.unknown .tray-led, .hdd-leds .hddled.unknown { background: #aab3bf; box-shadow: none; }
+.tray.empty .tray-led { background: #4d5359; box-shadow: none; }
+.silver-trays .tray.empty { background: linear-gradient(180deg, #3a3e43, #26292d); }
+.tray:hover { filter: brightness(1.15); }
+/* the trays and HDD lights double as the drive-bay buttons; undo the diagram bay look */
+.trays .bay, .hdd-leds .bay { width: auto; border-radius: 2px; }
+.trays .bay::after, .hdd-leds .bay::after { display: none; }
+
+/* Hikvision */
+.fp.hik .fp-body { gap: 6px; }
+.num-leds { display: flex; gap: 3px; }
+.num-leds i { width: 4px; height: 4px; border-radius: 50%; background: #d7dade; opacity: .8; }
+.disc-tray { display: block; width: 70px; height: 7px; border-radius: 1px; background: #111315; border: 1px solid #3a3e43; }
+.disc-tray.short { width: 34px; }
+.keys { display: grid; grid-template-columns: repeat(5, 6px); gap: 2px; }
+.keys i { height: 4px; border-radius: 1px; background: #3d4248; }
+.dpad { width: 13px; height: 13px; border-radius: 50%; background: radial-gradient(circle, #2a2d31 0 30%, #44494f 32% 100%); flex-shrink: 0; }
+.knob { width: 15px; height: 15px; border-radius: 50%; flex-shrink: 0; background: radial-gradient(circle at 40% 35%, #555b62, #141618 70%); box-shadow: 0 0 0 1px #000; }
+.knob.big { width: 20px; height: 20px; }
+.knob.sm { width: 9px; height: 9px; }
+.grille { flex: 1; align-self: stretch; margin: 5px 0; background: repeating-linear-gradient(180deg, #3a3f45 0 2px, #151719 2px 5px); border-radius: 3px; }
+.keypad { display: flex; align-items: center; gap: 4px; padding: 4px 6px; background: #121416; border: 1px solid #3c4147; border-radius: 6px; }
+.kp-lcd { width: 22px; height: 12px; background: #0b0c0d; border: 1px solid #333; border-radius: 1px; }
+.kp-keys { display: grid; grid-template-columns: repeat(4, 6px); gap: 2px; }
+.kp-keys i { height: 5px; background: #2f63c8; border-radius: 1px; opacity: .85; }
+.hdd-leds { position: absolute; left: 50%; bottom: 3px; transform: translateX(-50%); display: grid; gap: 2px; padding: 1px 3px; background: rgba(0,0,0,.55); border-radius: 3px; }
+.hdd-leds .hddled { display: block; width: 5px; height: 5px; border-radius: 50%; border: 0; background: #39d96b; box-shadow: 0 0 3px #39d96b; cursor: pointer; padding: 0; }
+.hdd-leds .hddled.empty { background: #444a50; box-shadow: none; }
+
+/* Dell */
+.dell-tag { width: 8px; align-self: stretch; margin: 3px 0; background: #2b2e32; border-radius: 1px; }
+.hex-bezel {
+  flex: 1; align-self: stretch; margin: 2px 0; border-radius: 3px; position: relative;
+  background-color: #17191c;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='30' viewBox='0 0 26 30'%3E%3Cpath d='M13 1 L25 8 L25 22 L13 29 L1 22 L1 8 Z' fill='none' stroke='%23b9bec4' stroke-width='2'/%3E%3C/svg%3E");
+  background-size: auto 100%; background-repeat: repeat-x; background-position: center;
+}
+.dell-badge { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); font: 700 7px Arial, sans-serif; color: #e6e8ea; background: #17191c; padding: 1px 3px; letter-spacing: 1px; }
+.lcd-strip { width: 22px; height: 4px; background: #2a5fa8; border-radius: 1px; }
+.fins { flex: 1; display: flex; gap: 3px; padding: 3px 4px 0; }
+.fins i { flex: 1; background: linear-gradient(90deg, #121416, #3b4046 50%, #121416); border-radius: 2px 2px 0 0; }
+.perf { flex: 1.1; position: relative; margin: 0 6px 3px; border-radius: 0 0 4px 4px;
+  background: radial-gradient(circle, #050606 1.1px, transparent 1.4px) 0 0 / 5px 4px, #2c3035; }
+.dell-round { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 22px; height: 22px; border-radius: 50%; background: #1c1e21; border: 1.5px solid #9aa0a6; font: 700 5.5px/19px Arial, sans-serif; text-align: center; color: #ddd; }
+
+/* AV */
+.am-panel { display: flex; gap: 3px; padding: 2px 5px; border: 1px solid #4b5056; border-radius: 2px; }
+.rocker { width: 7px; height: 11px; background: #0b0c0d; border: 1px solid #555; border-radius: 1px; box-shadow: inset 0 -4px 0 #333; flex-shrink: 0; }
+.blue-lcd { width: 40px; height: 11px; background: linear-gradient(#3da2ff, #1a63d1); border-radius: 1px; box-shadow: 0 0 6px rgba(60,150,255,.6); }
+.btn-grid { display: grid; grid-template-columns: repeat(10, 6px); gap: 2px; }
+.btn-grid i { height: 5px; background: #8e959c; border-radius: 1px; }
+.red-btn { width: 9px; height: 9px; background: #e03131; border-radius: 1px; box-shadow: 0 0 3px #e03131; flex-shrink: 0; }
+.red-btn.small { width: 7px; height: 7px; }
+.channel { display: flex; align-items: center; gap: 3px; padding: 1px 4px; border: 1px solid #3d4248; border-radius: 2px; }
+.pill-btn { width: 8px; height: 5px; background: #d0d3d6; border-radius: 1px; }
+.xlr { width: 10px; height: 10px; border-radius: 50%; background: #0c0d0e; border: 2px solid #8a9096; flex-shrink: 0; }
+
+/* NEC / router / monitor / shelves */
+.nec-left { display: flex; flex-direction: column; gap: 3px; padding-right: 6px; border-right: 1px solid #3a3e43; }
+.cards { flex: 1; display: flex; gap: 3px; align-self: stretch; padding: 3px 0; }
+.cards i { flex: 1; background: #24282c; border: 1px solid #3a3f45; border-radius: 1px; }
+.slots { display: flex; flex-direction: column; gap: 3px; width: 34%; }
+.slots i { height: 6px; background: #121416; border: 1px solid #44494f; border-radius: 1px; }
+
+.shelf-scene { background: none; box-shadow: none; flex-direction: column; justify-content: flex-end; }
+.shelf-scene .fp-body { align-items: flex-end; justify-content: center; padding: 0 10px; }
+.shelf-plate { flex: 0 0 6px; background: linear-gradient(#3b4046, #1b1e21); border-radius: 1px; box-shadow: 0 2px 2px rgba(0,0,0,.5); }
+.router-box { display: flex; align-items: center; gap: 6px; height: 70%; padding: 0 8px; width: 60%; background: linear-gradient(#3361b8, #1f4893); border-radius: 2px; }
+.desk-nas { display: flex; width: 55%; height: 85%; padding: 6px 4px 3px; background: linear-gradient(#25282c, #141618); border-radius: 3px 3px 1px 1px; }
+.desk-nas .trays { padding: 0; }
+.monitor { position: relative; width: 82%; height: 100%; display: flex; flex-direction: column; align-items: center; }
+.monitor .screen { flex: 1; width: 100%; background: linear-gradient(135deg, #1a1d21, #0b0c0e 60%, #22262b); border: 3px solid #111; border-radius: 2px; }
+.monitor .stand { width: 14px; height: 10px; background: #2a2d31; }
+.monitor.back .screen { background: #23262a; }
+
+/* patching */
+.patch-rows { flex: 1; display: flex; flex-direction: column; justify-content: space-evenly; align-self: stretch; }
+.patch-row { display: flex; align-items: center; gap: 4px; height: calc(var(--u-height) * .7); }
+.patch-row .ports-wrap { flex: 1; justify-content: space-between; height: 60%; }
+.label-strip { width: 10px; height: 60%; background: #eceae4; border-radius: 1px; }
+.fibre-row { flex: 1; display: flex; justify-content: space-evenly; align-items: center; }
+.lc { width: 9px; height: 6px; background: #3fc1b8; border-radius: 1px; box-shadow: inset 0 0 0 1px #1e7c76; }
+.fibre-handle { width: 8px; height: 60%; border: 2px solid #6c7278; border-left: 0; border-radius: 0 3px 3px 0; }
+.d-row { flex: 1; display: flex; justify-content: space-evenly; align-items: center; }
+.dhole { width: 12px; height: 12px; border-radius: 50%; background: #0b0c0d; border: 1px solid #5b6167; display: flex; align-items: center; justify-content: center; }
+.dhole b { width: 6px; height: 5px; background: #222; border-radius: 1px; }
+.dhole.xlr b { width: 6px; height: 6px; border-radius: 50%; background: #9aa0a6; }
+.fingers { flex: 1; display: flex; justify-content: space-evenly; align-self: stretch; padding: 2px 0; }
+.fingers i { width: 10px; background: #0d0e10; border-radius: 3px; border: 1px solid #3a3f45; }
+.vent-slots { flex: 1; align-self: stretch; margin: 3px 4px; background: repeating-linear-gradient(90deg, #0a0b0c 0 18px, transparent 18px 22px), repeating-linear-gradient(180deg, transparent 0 3px, #2a2d31 3px 5px); border-radius: 2px; opacity: .9; }
+.vent-slots.short { flex: 0 0 60px; }
+.outlets { flex: 1; display: flex; justify-content: space-evenly; align-items: center; }
+.au { width: 14px; height: 12px; background: #0f1012; border: 1px solid #44494f; border-radius: 2px; position: relative; }
+.au::before, .au::after { content: ""; position: absolute; top: 3px; width: 1.5px; height: 4px; background: #8a9096; }
+.au::before { left: 3px; transform: rotate(30deg); }
+.au::after { right: 3px; transform: rotate(-30deg); }
+.ups-lcd { width: 26px; height: 10px; background: #1a63d1; border-radius: 1px; }
+
+/* rear */
+.rear-face .fp-body { padding: 2px 4px; }
+.psu2 { display: flex; align-items: center; gap: 2px; height: 80%; max-height: 22px; padding: 0 3px; background: #15171a; border: 1px solid #000; border-radius: 2px; }
+.fp.silver .psu2 { background: #b2b7bc; border-color: #8c9298; }
+.fan-sm { width: 9px; height: 9px; border-radius: 50%; background: repeating-conic-gradient(#0d0e10 0 20deg, #3a3f45 20deg 40deg); }
+.iec { width: 7px; height: 6px; background: #000; border-radius: 1px; box-shadow: 0 0 0 1px #555; }
+.fan { width: 15px; height: 15px; border-radius: 50%; flex-shrink: 0; background: radial-gradient(circle, #222 0 25%, transparent 26%), repeating-conic-gradient(#111 0 25deg, #4a4f55 25deg 50deg); box-shadow: 0 0 0 1.5px #6a7076; }
+.fp.silver .fan { box-shadow: 0 0 0 1.5px #8f959b; }
+.hik-io { display: grid; grid-template-columns: repeat(3, 7px); gap: 2px; }
+.hik-io i { height: 5px; background: #0b0c0d; border: 1px solid #3c4248; }
+.terminal { width: 18px; height: 7px; background: #2fa34d; border-radius: 1px; }
+.punch { flex: 1; display: grid; grid-auto-flow: column; gap: 3px; align-self: stretch; padding: 3px 0; }
+.punch i { background: repeating-linear-gradient(90deg, #ececec 0 2px, #2b6cb0 2px 3px); border-radius: 1px; opacity: .8; }
+
+/* name chip shown on hover / search match / when Labels is on */
+.name-chip {
+  position: absolute; left: 13px; top: 50%; transform: translateY(-50%); z-index: 3;
+  background: rgba(0, 32, 91, .88); color: #fff; font: 700 10px/1.3 var(--font-body);
+  padding: 1px 6px; border-radius: 3px; max-width: 55%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  pointer-events: none; opacity: 0; transition: opacity .12s;
+}
+.device.skin:hover .name-chip, .device.skin.match .name-chip, .rack.labels .name-chip { opacity: 1; }
+
+/* rails: square cage-nut holes */
+.rack-bay { background:
+  linear-gradient(90deg, #1b1e21 0 6px, transparent 6px calc(100% - 6px), #1b1e21 calc(100% - 6px)),
+  #24282c; }
+.rack-numbers { background: #2e3236; background-image: radial-gradient(#0c0d0e 0 0) ; }
+.rack-numbers div { border-top: 0; position: relative; }
+.rack-numbers div::after { content: ""; position: absolute; top: 50%; width: 5px; height: 5px; margin-top: -2.5px; background: #0c0d0e; border-radius: 1px; }
+.rack-numbers:first-child div::after { right: 2px; }
+.rack-numbers:last-child div::after { left: 2px; }
+.rack-numbers div { justify-content: flex-start; padding-left: 4px; }
+.rack-numbers:last-child div { justify-content: flex-end; padding-right: 4px; padding-left: 0; }
