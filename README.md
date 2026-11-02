@@ -73,10 +73,10 @@ While `serve.rb` runs, it checks every device that has an **IP address** about o
      "verifyTls": true, "username": "", "password": "" }
    ```
 2. Create the key in UniFi: **Settings → Control Plane → Integrations → Create API Key**. Works with UniFi consoles and the self-hosted Network Application (detected automatically). Use **either** an API key **or** a read-only local UniFi account (`username`/`password`); with a login alone everything comes from the older API (devices, serials, ports, PoE and what's on each port).
-3. On the host computer, open **UniFi sync** in the sidebar → **Fetch from UniFi**. (The button only appears on the host; other computers never see it.) Each UniFi device is matched to a rack device by MAC, serial, IP or name. Check the matches, then **Apply** (only empty fields are filled unless you tick *Overwrite*).
+3. Open **UniFi sync** in the sidebar → **Fetch from UniFi**. (Only Owners see the button: the Rack View Owner group with sign-in, or the host computer in testing.) Each UniFi device is matched to a rack device by MAC, serial, IP or name. Check the matches, then **Apply** (only empty fields are filled unless you tick *Overwrite*).
 4. Linked devices get a **Ports** panel in their details. Click a port to see what's on it; if that's a device in your racks it pulses (or **Go to** jumps to its rack). Anything on a port that has an IP gets a **Ping** button: the server pings it once and shows "Replied · 3 ms" or "No reply". Only addresses already in Rack View or the UniFi snapshot can be pinged, from the College network.
 
-Only the host computer can sync; everyone can see the port details. UniFi's official API gives devices and port status; serials, port names and exact per-port links come from the console's older API, used automatically when the key allows it.
+Only Owners can sync; everyone can see the port details. UniFi's official API gives devices and port status; serials, port names and exact per-port links come from the console's older API, used automatically when the key allows it.
 
 ## Files
 
